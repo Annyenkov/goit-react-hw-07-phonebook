@@ -19,11 +19,12 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async ({ name, phone, id }, thunkAPI) => {
+  async ({ name, number, id }, thunkAPI) => {
+    console.log(name, number)
     try {
       const response = await axios.post(
         'https://63d984642af48a60a7bb4587.mockapi.io/contacts',
-        { name, phone, id: nanoid() }
+        { name, number, id: nanoid() }
       );
       return response.data;
     } catch (error) {

@@ -17,6 +17,7 @@ const ContactForm = () => {
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
+    console.log(name, value)
     switch(name) {
       case 'name':
         setName(value);
@@ -45,7 +46,7 @@ const ContactForm = () => {
       return Notiflix.Notify.info(`${name} is already in contacts`);
     }
 
-    dispatch(addContact(name, number));
+    dispatch(addContact({name, number}));
     reset();
   };
 
