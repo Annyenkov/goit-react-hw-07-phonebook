@@ -2,12 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Icon, ListItem } from "./ContactList.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask } from "redux/tasksSlice";
 import { getContacts, getFilterValue } from "redux/selectors";
+import { fetchContacts, deleteContact } from '../../redux/contactsOperation';
+import { useEffect } from "react";
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  console.log(contacts)
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  
   const filterValue = useSelector(getFilterValue);
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filterValue)
@@ -22,7 +29,7 @@ const ContactList = () => {
             <span>{name}:</span>
             <span>{number}</span>
             <Button
-              onClick={() => dispatch(deleteTask(id))}
+              onClick={() => dispatch(deleteContact(id))}
             >Delete</Button>
           </ListItem>
         )

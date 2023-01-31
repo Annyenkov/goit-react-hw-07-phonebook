@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import Notiflix from 'notiflix';
-import { addTask } from 'redux/tasksSlice';
+import { addContact } from 'redux/contactsOperation';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -45,7 +45,7 @@ const ContactForm = () => {
       return Notiflix.Notify.info(`${name} is already in contacts`);
     }
 
-    dispatch(addTask(name, number));
+    dispatch(addContact(name, number));
     reset();
   };
 
